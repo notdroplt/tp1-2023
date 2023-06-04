@@ -1,0 +1,148 @@
+:root {
+	--grad-back-dark: #150033;
+	--grad-back: linear-gradient(80deg, #150033 0%, #660066 100%);
+	--grad-front: linear-gradient(185deg, #FBFF37 2%, #FF6006 100%);
+
+	--grad-back-ext: linear-gradient(256deg, #660066 -130%, #150033 90%);
+}
+
+* {
+	font-family: sans-serif;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+}
+
+main {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	background: var(--grad-back);
+	padding-bottom: auto;
+	height: 100vh;
+}
+
+nav {
+	margin: 15px;
+	border: 3px solid;
+	border-image-slice: 1;
+	border-image-source: var(--grad-front);
+	color: white;
+	padding: 10px;
+	position: relative;
+	display: flex;
+	height: 90%;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+}
+
+nav > section {
+	margin: auto 10px;
+}
+
+nav > section.active-nav-section > a {
+	color: var(--grad-back-dark);
+}
+
+nav > section.active-nav-section {
+	position: relative;
+	background-color: white;
+	padding: 11px;
+	margin: 11px 0;
+	margin-left: 20px;
+}
+
+nav > section.active-nav-section:before {
+	position: absolute;
+	top: 0px;
+	left: -10%;
+	content: "";
+	background-color: white;
+	width: 3px;
+	height: 100%;
+	margin-right: 10px;
+}
+
+ul {
+	display: flex;
+	flex-flow: column nowrap;
+	list-style-type: none;
+	position: relative;
+}
+
+ul:before {
+	content: "";
+	position: absolute;
+	top: 0px;
+	left: 20px;
+	width: 3px;
+	height: 100%;
+	background-color: #aaa;
+}
+
+nav ul li {
+	margin: 5px 0;
+}
+
+nav a {
+	text-decoration: none;
+	color: white;
+}
+
+main>article {
+	flex-grow: 3;
+	color: white;
+	height: auto;
+	padding-left: 3px;
+	margin: 10px 20%;
+}
+
+iframe {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+footer, footer p {
+	color: #FFFFFF;
+	background-color: #222222;
+	position: fixed;
+	bottom: 0;
+	width: 100vw;
+	padding: 0px;
+	margin: 0px;
+	display: flex;
+}
+
+footer > p {
+	justify-content: flex-end;
+}
+
+#command:not(.active) {
+	visibility: hidden;
+}
+
+#command {
+	color: white;
+	position: fixed;
+	bottom: 0px;
+	width: 100vw;
+	visibility: visible;
+	padding: 1px;
+	margin: 0;
+	background-color: #333333;
+	font-family: monospace;
+}
+
+#command::before {
+	content: attr(data-content);
+	background-color: #77d5f0;
+	padding: 0 3px;
+	margin-right: 1em;
+	color: black;
+}
