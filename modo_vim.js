@@ -68,7 +68,7 @@ const mode_handler = {
 document.onkeydown = (e) => {
 	let linha = document.getElementById("command");
 	e = e || window.event;
-
+	console.log(e);
 	if (mode.includes("command")) mode = "command";
 	if (e.key === 'Escape') {
 		mode = "normal";
