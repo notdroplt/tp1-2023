@@ -146,3 +146,11 @@ footer > p {
 	margin-right: 1em;
 	color: black;
 }
+
+.string {
+	color: brown;
+}
+
+.type {
+	color: blue;
+}
