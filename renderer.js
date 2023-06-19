@@ -51,8 +51,6 @@ class Crenderer {
 const codigo = document.getElementById("codigo")
 
 codigo.addEventListener("keydown", function(e){
-	return;
-	console.log(e);
 	let cod = document.getElementById("codigo");
 	let renderer = new Crenderer(cod.innerHTML);
 

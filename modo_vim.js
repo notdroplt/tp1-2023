@@ -3,37 +3,42 @@
 let command = '';
 let mode = "normal";
 
-const command_focus = (focused) => {
+
+const command_focus = focused => {
 	let linha = document.getElementById("command");
 	mode = "command";
 	linha.dataset.content = focused ? "command" : "normal"
 }
 
 const normal_mode = (e, linha) => {
-	if (e.key === ":") {
-		mode = "command";
-		command_mode(e, linha);
+	switch (e.key) {
+		case ":":
+			mode = "command";
+			command_mode(e, linha);
+			break;
+		default:
+			break;
 	}
+
 }
 
-const insert_mode = (e, linha) => {
-	if (command == "i") {
-		window.alert("toda a página será editável a partir desse momento");
-		let elements = document.getElementsByTagName("*");
+const insert_mode = (_, linha) => {
+	window.alert("toda a página será editável a partir desse momento, esse é um processo sem volta que VAI estragar o css");
+	let elements = document.getElementsByTagName("*");
 
-		for (let i = 0; i < elements.length; ++i)
-			elements[i].contentEditable = "true";
-		console.log("h")
-		command = "";
-		linha.innerHTML = command;
-	}
+	for (let i = 0; i < elements.length; ++i)
+		elements[i].contentEditable = "true";
+	command = "";
+	linha.innerHTML = command;
+	mode_handler = {}
+
 }
 
 const command_mode = (e, linha) => {
 	if (e.key === "Backspace")
 		command = command.slice(0, -1);
 	else
-		command += e.key.length == 1? e.key : '';
+		command += e.key.length == 1 ? e.key : '';
 
 	if (e.key !== "Enter") {
 		linha.innerHTML = command;
@@ -42,16 +47,22 @@ const command_mode = (e, linha) => {
 
 	if (command[0] != ':') linha.dataset.content = "not a qualified command";
 
-	switch(command) {
+	switch (command) {
 		case ":qa!":
 			window.alert("easter egg!");
+			break;
+		case ":w":
+		case ":wq":
+			print()
 			break;
 		case ":github":
 			window.open("https://github.com/notdroplt/tp1-2023");
 			break;
 		default:
-			console.error(`command "${command}" is unknown`);
-			linha.dataset.content = "unknown command";
+			let cred = document.getElementById("cred");
+			cred.style.color = "red";
+			cred.innerHTML = `"${command}" não é um comando`
+			break;
 	}
 
 	command = "";
@@ -59,7 +70,7 @@ const command_mode = (e, linha) => {
 	linha.innerHTML = "";
 }
 
-const mode_handler = {
+let mode_handler = {
 	"normal": normal_mode,
 	"insert": insert_mode,
 	"command": command_mode
@@ -67,8 +78,6 @@ const mode_handler = {
 
 document.onkeydown = (e) => {
 	let linha = document.getElementById("command");
-	e = e || window.event;
-	console.log(e);
 	if (mode.includes("command")) mode = "command";
 	if (e.key === 'Escape') {
 		mode = "normal";
