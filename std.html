@@ -107,18 +107,39 @@ printf("sono durante o tp1: %d horas\n", tempo_de_sono)
                 </pre>
                 <code id="printf-output"> sono durante o tp1: 4 horas </code>
             </div>
+        </article>
+        <article>
             <h2 id="malloc">Alocação de memória</h2>
 
-            <p>A alocação de memória é uma parte muito importante da bilbioteca, uma vez que permite o uso de códigos muito mais complexos 
-                dinânimcos para o programador
-            </p>
+            <p>Alocação de memória é basicamente uma redpill, ela te mostra a verdadeira força da linguagem e permite programas muito mais complexos </p>
 
-            <p>No nosso exemplo, assumiremos uma região de memória de 64 bytes, para fins de visualização</p>
+            <p>No nosso singelo exemplo, assumiremos uma região de memória de 64 bytes e um único ponteiro, para fins de visualização</p>
 
-            <div class="memory"></div>
+            <div class="memory" id="first_memory"></div>
 
-            <p>ao chamar a função malloc </p>
+            <p>ao chamar a função malloc, uma certa região da memória será mapeada e alocada para uso arbitrário</p>
+            <form id='alloc-form'>
+                <input type="number" name="malloc_size" id="malloc-size" min="1" max="64">
+                <input type="submit" value="alocar memória" id="memsize">
+            </form>
         </article>
+        <article>
+            <h2 id="filesys">Sistema de arquivos, no alcance de uma função</h2>
+            <p>Acessar o sistema de arquivos se torna essencial a partir do momento em que o programa necessita de mais entradas do que a própria entrada padrão</p>
+            <p>O uso de arquivos é mantido por um "protocolo" de propriedade, onde é responsabilidade do programador abrir, utilizar e fechar um arquivo, na forma</p>
+            <pre class="codeblock">
+// abrir o arquivo
+FILE * fp = fopen("nome do aquivo", "modo");
+// exemplo de uso do arquivo
+char * str = "um texto pequeno";
+fwrite(fp, strlen(str), 1, str);
+
+// fechar o arquivo
+fclose(fp);
+
+            </pre>
+        </article>
+        <p>---</p>
     </main>
     <footer>
 		<p id="command" onclick="command_focus(true)" onfocusout="command_focus(false)"></p>

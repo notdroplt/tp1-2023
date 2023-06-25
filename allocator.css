@@ -1,14 +1,15 @@
 
 .memory {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    width: 50%;
-    aspect-ratio: 1 / 1;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 100%;
+    aspect-ratio: 4 / 1;
 }
 
 .memory>* {
     border: 1px solid var(--grad-back-dark);
+    transition: all .5s ease;
 }
 
 .memory>*:nth-child(2n) {

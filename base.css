@@ -5,7 +5,7 @@
 	--grad-back-dark: #150033;
 	--grad-back: linear-gradient(80deg, #150033 0%, #660066 100%);
 	--grad-front: linear-gradient(185deg, #FBFF37 2%, #FF6006 100%);
-	--grad-back-ext: linear-gradient(256deg, #660066 -130%, #150033 90%);
+	--grad-back-ext: linear-gradient(80deg, #660066 100%, #150033 0%);
 
 	--code-string: #C98342;
 	--code-type: #5b75ca;
@@ -56,23 +56,23 @@ h1, h2, h3{
 }
 
 main {
+	min-height: 100vh;
 	grid-area: 1 / 2 / 3 / 3;
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
-
-	padding-bottom: auto;
 	height: 100vh;
 
 	color: white;
 	height: auto;
-	padding-left: 3px;
+
 	margin: 10px 20%;
+	margin-bottom: 35%;
 }
 
 nav {
-	position: sticky;
+	position: fixed;
 	top: 0;
 	display: flex;
 	flex-flow: column nowrap;
@@ -84,6 +84,7 @@ nav {
 	color: white;
 	padding: 10px;
 	height: 90%;
+	width: 20%
 }
 
 nav::after {
