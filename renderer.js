@@ -33,30 +33,27 @@ class Crenderer {
 
 	tokenize(line) {
 		const types_regex = /\b(char|short|int|long|float|double|\w[\w\d]*_t)\b/g
-
+		const function_regex = /(\w+)\((.+)*,*\s*(.+)?\)/g
+		const num_regex = /(\d\.?\d*)/g
 		// escape sequences
 		line = line.replace('<', "&lt;").replace('>', "&gt;");
 
-		line = line.replace(/("[^\"]*")/, (_, v) => `<span class="string">${v}</span>`);
-		line = line.replace(types_regex, (_, v) => `<span class="type">${v}</span>`);
-		console.log(line);
-		return [line];
+		line = line.replace(/("[^\"]*")/, (_, v) => `<span class="string">${v}</span>`)
+					.replace(function_regex, (_, v, ...e) => `<span class="function">${v}</span>(${e.filter(el => typeof el == 'string').slice(0, -1)[0]})`)
+					.replace(types_regex, (_, v) => `<span class="type">${v}</span>`)
+					.replace(num_regex, (_, v) => `<span class="number">${v}</span>`)
+		return line;
 	}
 
 	render() {
-		return this.content.split('\n').map(this.tokenize)
+		return this.content.split('\n').filter(el => el.trim()).map(this.tokenize)
 	}
 }
+(cod => {
+	let arr = Array.from(cod);
+	arr.forEach(element => {
+		let renderer = new Crenderer(element.innerHTML);
+		element.innerHTML = renderer.render();
+	})
 
-const codigo = document.getElementById("codigo")
-
-codigo.addEventListener("keydown", function(e){
-	let cod = document.getElementById("codigo");
-	let renderer = new Crenderer(cod.innerHTML);
-
-	if (e.key === "Backspace")
-		cod.innerHTML = cod.innerHTML.slice(0, -1);
-	else
-		cod.innerHTML += e.key.length == 1? e.key : '';
-	cod.innerHTML = renderer.render()
-})
+})(document.getElementsByClassName("codeblock"))

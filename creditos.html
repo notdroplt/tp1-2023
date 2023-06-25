@@ -6,11 +6,12 @@
 	<meta name="viewport" content="width=device-width">
 	<title>O ABdeC</title>
 	<link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="creditos.css">
 </head>
 
 <body>
 	<nav>
-		<section class="active-nav-section">
+		<section >
 			<a href="./index.html">Página Inicial</a>
 		</section>
 		<section>
@@ -67,34 +68,20 @@
 				</li>
 			</ul>
 		</section>
-		<section>
+		<section class="active-nav-section">
 			<a href="creditos.html">Créditos</a>
 		</section>
 	</nav>
-	<main>
-
-		<article>
-			<h1>O ABdeC</h1>
-			<p>Nada melhor do que o poder de controlar um computador inteiro com palavras, não é mesmo? Imagine poder
-				controlar TUDO que a máquinatem para oferecer, simplesmente utilizando de uma linguagem que foi
-				aperfeiçoada durante os anos</p>
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/U3aXWizDbQ4" title="C in 100 Seconds"
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-				allowfullscreen></iframe>
-			<p>Esse site é focado em mostrar alguns conceitos por trás da enorme cortina que a linguagem C, junto com o
-				seus compiladores + o ambiente
-				padrão, se envolve para formar um código que é conciso, compreensível e extremamente robusto</p>
-			<p>Alguns conceitos abordados serão:
-			<p>
-			<ul>
-				<li>Os ponteiros</li>
-				<li>A real mágica</li>
-				<li>O famoso malloc</li>
-				<li>Entre outros</li>
-			</ul>
-		</article>
+	<main class="creditos">
+		<h1>Créditos</h1>
+        <a href="https://github.com/notdroplt/">
+            <img id="pfp" src="https://avatars.githubusercontent.com/u/117052412?v=4" alt="pfp" width="100px" height="100px">
+        </a>
+        <p>Todo o site foi pensado, criado e progamado por mim mesmo, porém a inspiração tanto para a paleta de cores quanto da barra de navegação
+            veio da <a href="">documentação da framework Astro</a>, já que a framework seria utilizada no projeto, mas a ideia foi descartada uma vez que não fazia
+            sentido um setup tão grande para um projeto que não demandava tanto</p>
 	</main>
+
 	<footer>
 		<p id="command" onclick="command_focus(true)" onfocusout="command_focus(false)"></p>
 		<p>desenvolvido por Arthur de Carvalho, TP1 2023</p>

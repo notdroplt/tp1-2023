@@ -8,60 +8,111 @@
 
 * {
 	font-family: sans-serif;
+	font-size: 14px;
+	box-sizing: border-box;
 }
 
-*:focus {
-	border: 5px solid red;
-}
-
-html, body {
+html,
+body {
 	margin: 0;
 	padding: 0;
 	width: 100vw;
 	height: 100vh;
 }
 
+body {
+	display: grid;
+	background: var(--grad-back);
+	grid-template-columns: 1fr 5fr;
+	grid-template-rows: 1fr;
+	grid-column-gap: 1px;
+	grid-row-gap: 1px;
+}
+
+@media (max-width: 1250px) {
+	body {
+		grid-template-columns: 30% auto;
+	}
+
+	main {
+		margin: 10px 10%;
+	}
+}
+
+@media (max-width: 800px) {}
+
+
 main {
+	grid-area: 1 / 2 / 3 / 3;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: flex-start;
 	align-items: stretch;
-	background: var(--grad-back);
+
 	padding-bottom: auto;
 	height: 100vh;
+
+	color: white;
+	height: auto;
+	padding-left: 3px;
+	margin: 10px 20%;
 }
 
 nav {
-	margin: 15px;
-	border: 3px solid;
-	border-image-slice: 1;
-	border-image-source: var(--grad-front);
-	color: white;
-	padding: 10px;
-	position: relative;
 	display: flex;
-	height: 90%;
 	flex-flow: column nowrap;
 	align-items: flex-start;
+	position: relative;
+	font-size: 16px;
+	grid-column: 1 / 2;
+	grid-row: span 4;
+	margin: 15px;
+	color: white;
+	padding: 10px;
+	height: 90%;
 }
 
-nav > section {
+nav::after {
+	position: absolute;
+	top: 0;
+	right: -3em;
+	content: "";
+	background-image: var(--grad-front);
+	height: 100%;
+	width: 1%;
+	z-index: 999;
+}
+
+nav>section {
 	margin: auto 10px;
 }
 
-nav > section.active-nav-section > a {
+nav a {
+	transition: all 0.3s ease-in-out;
+}
+
+
+nav a:hover {
+	background-color: white;
+	color: var(--grad-back-dark);
+	padding: 3px;
+}
+
+nav>section.active-nav-section>a {
 	color: var(--grad-back-dark);
 }
 
-nav > section.active-nav-section > a {
+nav>section.active-nav-section>a,
+nav>section>a:hover {
 	position: relative;
 	background-color: white;
-	padding: 11px;
+	padding: 5px 3vw 5px 5px;
 	margin: 11px 0;
 	margin-left: 20px;
 }
 
-nav > section.active-nav-section:before > a{
+nav>section.active-nav-section>a:before,
+nav>section>a:hover:before {
 	position: absolute;
 	top: 0px;
 	left: -10%;
@@ -98,14 +149,6 @@ nav a {
 	color: white;
 }
 
-main>article {
-	flex-grow: 3;
-	color: white;
-	height: auto;
-	padding-left: 3px;
-	margin: 10px 20%;
-}
-
 iframe {
 	display: block;
 	margin-left: auto;
@@ -124,7 +167,7 @@ footer {
 	text-align: right;
 }
 
-footer > p {
+footer>p {
 	margin: 0
 }
 
@@ -156,15 +199,19 @@ footer > p {
 }
 
 .string {
-	color: brown;
+	color: #C98342;
 }
 
 .type {
-	color: blue;
+	color: #2A50CF;
 }
 
 .function {
-	color: yellow;
+	color: #E5D062;
+}
+
+.number {
+	color: #B9CD97;
 }
 
 .codeblock {

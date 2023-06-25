@@ -1,0 +1,36 @@
+h1 {
+    font-size: xx-large;
+}
+
+main {
+    grid-area: 1 / 2 / 3 / 3;
+	display: block;
+
+	padding-bottom: auto;
+	height: 100vh;
+	
+	color: white;
+	height: auto;
+	padding-left: 3px;
+	margin: 10px 20%;
+}
+
+img#pfp {
+    float: left;
+    margin: 5px;
+    transition: all 0.7s ease-in-out;
+    position: relative;
+}
+
+img#pfp:hover {
+    top: -3px;
+    right: -3px;
+}
+
+main > p {
+    margin-top: 5%;
+}
+
+main a {
+    color: white;
+}

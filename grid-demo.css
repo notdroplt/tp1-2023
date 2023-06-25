@@ -1,0 +1,16 @@
+.demo-grid {
+    display: grid;
+    grid-column-gap: 1px;
+    grid-row-gap: 1px; 
+    background: #111111;
+    grid-template: 
+        'a b' .3fr
+        'c d' 1fr;
+}
+
+
+
+.demo-grid:nth-child(1) { grid-area: a; }
+.demo-grid:nth-child(2) { grid-area: b; }
+.demo-grid:nth-child(3) { grid-area: c; }
+.demo-grid:nth-child(4) { grid-area: d; } 
