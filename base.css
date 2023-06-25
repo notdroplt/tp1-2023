@@ -1,14 +1,23 @@
+@import url(https://cdn.jsdelivr.net/npm/firacode@6.2.0/distr/fira_code.css);
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 :root {
 	--grad-back-dark: #150033;
 	--grad-back: linear-gradient(80deg, #150033 0%, #660066 100%);
 	--grad-front: linear-gradient(185deg, #FBFF37 2%, #FF6006 100%);
-
 	--grad-back-ext: linear-gradient(256deg, #660066 -130%, #150033 90%);
+
+	--code-string: #C98342;
+	--code-type: #5b75ca;
+	--code-function: #E5D062;
+	--code-number: #B9CD97;
+	--code-comment: #777;
+	--code-format: lightblue;
 }
 
 * {
-	font-family: sans-serif;
-	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
 	box-sizing: border-box;
 }
 
@@ -21,8 +30,10 @@ body {
 }
 
 body {
+	min-height: 100vh;
 	display: grid;
-	background: var(--grad-back);
+	background: var(--grad-back) no-repeat;
+    background-attachment: fixed;
 	grid-template-columns: 1fr 5fr;
 	grid-template-rows: 1fr;
 	grid-column-gap: 1px;
@@ -39,8 +50,10 @@ body {
 	}
 }
 
-@media (max-width: 800px) {}
-
+h1, h2, h3{
+	font-family: 'Fira Code', monospace;
+	font-size: xx-large;
+}
 
 main {
 	grid-area: 1 / 2 / 3 / 3;
@@ -59,10 +72,11 @@ main {
 }
 
 nav {
+	position: sticky;
+	top: 0;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: flex-start;
-	position: relative;
 	font-size: 16px;
 	grid-column: 1 / 2;
 	grid-row: span 4;
@@ -199,20 +213,30 @@ footer>p {
 }
 
 .string {
-	color: #C98342;
+	color: var(--code-string);
 }
 
 .type {
-	color: #2A50CF;
+	color: var(--code-type);
 }
 
-.function {
-	color: #E5D062;
+.function, .escape{
+	color: var(--code-function);
 }
 
 .number {
-	color: #B9CD97;
+	color: var(--code-number);
 }
+
+.comment {
+	color: var(--code-comment);
+}
+
+.format {
+	color: var(--code-format);
+}
+
+
 
 .codeblock {
 	font-family: monospace;

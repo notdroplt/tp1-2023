@@ -12,7 +12,7 @@ main {
 	color: white;
 	height: auto;
 	padding-left: 3px;
-	margin: 10px 20%;
+	margin: 10px 10%;
 }
 
 img#pfp {
@@ -33,4 +33,24 @@ main > p {
 
 main a {
     color: white;
+}
+
+h2 {
+    clear: both;
+}
+
+code, code > a  {
+    font-family: monospace;
+	background-color: #333333;
+	padding: .2em;
+    margin: 1px;
+    font-family: 'Fira Code', monospace;
+}
+
+a[href^="http"] {
+    color: lightblue;
+}
+
+main:nth-child(2) {
+    margin-top: 2em;
 }

@@ -11,15 +11,10 @@ const command_focus = focused => {
 }
 
 const normal_mode = (e, linha) => {
-	switch (e.key) {
-		case ":":
+	if (e.key === ':') {
 			mode = "command";
 			command_mode(e, linha);
-			break;
-		default:
-			break;
 	}
-
 }
 
 const insert_mode = (_, linha) => {

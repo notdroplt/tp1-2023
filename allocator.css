@@ -1,0 +1,20 @@
+
+.memory {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 50%;
+    aspect-ratio: 1 / 1;
+}
+
+.memory>* {
+    border: 1px solid var(--grad-back-dark);
+}
+
+.memory>*:nth-child(2n) {
+    background-color: #555;
+}
+
+.memory>*:nth-child(2n+1) {
+    background-color: #777;
+}

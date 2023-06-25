@@ -2,11 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="base.css">
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="Site feito para demonstrar algumas características de C">
+	<meta name="author" content="Arthur (notdroplt)">
+	
+	<title>O ABdeC</title>
+	<link rel="stylesheet" type="text/css" href="base.css">
     <link rel="stylesheet" href="grid-demo.css">
+    <link rel="stylesheet" href="allocator.css">
 </head>
 
 <body>
@@ -75,27 +81,43 @@
     <main>
         
         <article>
-            <h1>A biblioteca padrão</h1>
+            <h1 class="title">A biblioteca padrão</h1>
             <p>Nessa página, daremos uma olhada em algumas funções da bilbioteca padrão de C, sem enrolar mais, aqui
                 estão elas</p>
 
-            <h2 id="printf">O printf</h2>
+            <h2 class="title" id="printf">O printf</h2>
             <p>O printf é uma função que é capaz de imprimir um texto formatado para a saída padrão, por mais que isso
                 pareça simples,
                 existe uma interessante engenharia por trás de como a função consegue detectar padrões
             </p>
             <p>a lógica é olhar por cada caractere e caso ele seja um caractere de escape, no caso <code class="block">%</code>, acionar as funções 
             formatação</p>
-            <div class="demo-grid">
-                <p>C</p>
-                <p>Output</p>
-                <pre class="codeblock" id="printf-demo">
-printf("teste", 1, 2, 3)
-                </pre>
-                <code id="printf-output"></code>
-            </div>
-            <!-- colocar demo do printf aqui -->
 
+            <p>supondo que nos temos as variáveis</p>
+            <pre class="codeblock">
+// valores aqui estão em média
+int tempo_cefet = 7;
+int tempo_cefast = 3;
+int horas_fazendo_tp1 = 10; // css foi responsável por 90% disso tudo
+int tempo_de_sono = 24 - tempo_cefet - tempo_cefast - horas_fazendo_tp1;</pre>
+            <p>podemos colocar no printf a seguinte expressão:</p>
+            <div class="demo-grid">
+                <pre class="codeblock" id="printf-demo">
+printf("sono durante o tp1: %d horas\n", tempo_de_sono)
+                </pre>
+                <code id="printf-output"> sono durante o tp1: 4 horas </code>
+            </div>
+            <h2 id="malloc">Alocação de memória</h2>
+
+            <p>A alocação de memória é uma parte muito importante da bilbioteca, uma vez que permite o uso de códigos muito mais complexos 
+                dinânimcos para o programador
+            </p>
+
+            <p>No nosso exemplo, assumiremos uma região de memória de 64 bytes, para fins de visualização</p>
+
+            <div class="memory"></div>
+
+            <p>ao chamar a função malloc </p>
         </article>
     </main>
     <footer>
@@ -105,7 +127,7 @@ printf("teste", 1, 2, 3)
 
     <script type="text/javascript" src="modo_vim.js" defer></script>
     <script type="text/javascript" src="renderer.js" defer></script>
-
+    <script type="text/javascript" src="allocator.js" defer></script>
 </body>
 
 </html>
