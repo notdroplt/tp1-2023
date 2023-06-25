@@ -88,24 +88,24 @@
         <p>Com um olhar mais abstrato: não, já que existem várias formas de processar dados dentro da linguagem. Porém olhando pela parte do código gerado, basicamente sim, e a esmagadora parte de todas as instruções do processador são explicadas utilizando aritimética simples. <a href="https://www.cs.sfu.ca/~ashriram/Courses/CS295/assets/notebooks/RISCV/RISCV_CARD.pdf">Exemplo com a arquitetura RISCV</a></p>
     </article>
     <article>
-        <h2 id="ponto-virgula">O ilustre ";"</h2>
-        <p>Um dos erros mais básicos é esquecer de colocar o `;` ao final de cada linha. Mas porquê que ele existe? A resposta não é muito clara, mas podemos ver com um exemplo</p>
-        <p>imagine um mundo onde C não tem ';', então temos o código abaixo</p>
+        <h2 id="ponto-virgula">O ilustre "<code>;</code>"</h2>
+        <p>Um dos erros mais básicos é esquecer de colocar o <code>;</code> ao final de cada linha. Mas porquê que ele existe? A resposta não é muito clara, mas podemos ver com um exemplo</p>
+        <p>imagine um mundo onde C não tem <code>;</code>, então temos o código abaixo</p>
         <pre class="codeblock">
 char * str = strcopy(s)
 (s + 2) = '\n'
         </pre>
-        <p>Normal até agora, certo? Tudo que esse pedaço de código faz é copiar uma string e colocar um '\n' no 3o caractere. Mas o problema aparece no compilador, pois ele ignora espaços em branco, fazendo o código se parecer mais com:</p>
+        <p>Normal até agora, certo? Tudo que esse pedaço de código faz é copiar uma string e colocar um <code>\n</code> no 3o caractere. Mas o problema aparece no compilador, pois ele ignora espaços em branco, fazendo o código se parecer mais com:</p>
         <pre class="codeblock">
 char*str=strcopy(s)(s+2)='\n'
         </pre>
         <p>com isso, o compilador entra em ambiguidade com dois casos</p>
         <ol>
             <li>O programador queria chamar uma funcão que foi retornada por outra função</li>
-            <li>O programador queria chamar uma função e depois calcular o valor de `s + 2`</li>
+            <li>O programador queria chamar uma função e depois calcular o valor de <code>s + 2</code></li>
         </ol>
         <p>como o compilador não pode "adivinhar", ele vai pela 1ª opção, que é a sintaticamente correta, mas não a desejada</p>
-        <p>por isso o `;` está aqui, para tirar ambiguidade de alguns casos</p>
+        <p>por isso o <code>;</code> está aqui, para tirar ambiguidade de alguns casos</p>
     </article>
     <article>
         <h2 id="ponteiros">Ponteiros, que nem meu dedo?</h2>

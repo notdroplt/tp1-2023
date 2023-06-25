@@ -12,6 +12,194 @@
 	<link rel="stylesheet" type="text/css" href="base.css">
 </head>
 <body>
-    
+    <nav>
+        <section>
+            <a href="./index.html">Página Inicial</a>
+        </section>
+        <section>
+            <a href="./linguagem_c.html">Linguagem C</a>
+            <ul>
+                <li>
+                    <a href="./linguagem_c.html#Existe-A-B">Existe A e B?</a>
+                </li>
+                <li>
+                    <a href="./linguagem_c.html#Tudo-Matematica">Tudo é matemática?</a>
+                </li>
+                <li>
+                    <a href="./linguagem_c.html#ponto-virgula">O ilustre ";"</a>
+                </li>
+                <li>
+                    <a href="./linguagem_c.html#ponteiros"> Ponteiros, que nem meu dedo?</a>
+                </li>
+                <li>
+                    <a href="./linguagem_c.html#antes-main">O que tem antes da main?</a>
+                </li>
+            </ul>
+        </section>
+        <section class="active-nav-section">
+            <a href="./gcc.html">O compilador GCC</a>
+            <ul>
+                <li>
+                    <a href="./gcc.html#caixa-preta">A caixa preta mágica</a>
+                </li>
+                <li>
+                    <a href="./gcc.html#codigo-meio">O código do meio</a>
+                </li>
+                <li>
+                    <a href="./gcc.html#numeros-mason">Os números Mason, o que eles significam</a>
+                </li>
+                <li>
+                    <a href="./gcc.html#codigo-escrito">O código não é o que eu tinha escrito</a>
+                </li>
+                <li>
+                    <a href="./gcc.html#ele-melhora">Ele melhora??????</a>
+                </li>
+            </ul>
+        </section>
+        <section >
+            <a href="./std.html">A biblioteca padrão</a>
+            <ul>
+                <li>
+                    <a href="./std.html#printf">printf é incrível</a>
+                </li>
+                <li>
+                    <a href="./std.html#alloc">alocação de memória, só que fácil</a>
+                </li>
+                <li>
+                    <a href="./std.html#filesys">Um sistema de arquivos inteiro, no alcance de uma função</a>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <a href="creditos.html">Créditos</a>
+        </section>
+    </nav>
+    <main>
+        <h1>O compilador GCC</h1>
+        <p>O compilador gcc (mingw no windows) é um dos principais compiladores para a linguagem C, e ele guarda muitos segredos dentro dele mesmo. Aqui veremos alguns</p>
+        <article>
+            <h2 id="caixa-preta">A caixa preta mágica</h2>
+            <p>Parece muito mundano simplesmente rodar <code>$ gcc prog.c</code> na linha de comando, mas o que esse programinha que é rodado faz, convenhamos que realmente parece, é mágica</p>
+            <p>mas ele não passa de um programa como qualquer outro</p>
+        </article>
+        <article>
+            <h2 id="codigo-meio">O código do meio</h2>
+            <p>Caso algum dia você passe pela flag <code>-S</code> no gcc, você deve ter visto que o compilador gera outro tipo de linguagem, como por exemplo</p>
+            <p>prog.c</p>
+            <pre class="codeblock">
+int min(int a, int b) {
+    return a > b ? a : b;
+}
+            </pre>
+            <p><code>$ gcc prog.c -S</code></p>
+            <pre class="asmcodeblock">
+min:
+    sub     sp, sp, #16
+    str     w0, [sp, 12]
+    str     w1, [sp, 8]
+    ldr     w1, [sp, 12]
+    ldr     w0, [sp, 8]
+    cmp     w1, w0
+    ble     .L2
+    ldr     w0, [sp, 12]
+    b       .L4
+.L2:
+    ldr     w0, [sp, 8]
+.L4:
+    add     sp, sp, 16
+    ret
+            </pre>
+            <p>Se você se pergunta o que é esse código gerado, não se assuste, todos já chegamos nesse ponto, isso é Assembly (para ARM, especificamente aarch64), o que é basicamente tudo que o computador processa, mas escrito em texto</p>
+            <p>assembly é um tipo de abstração de nível muito baixo, já que cada linha normalmente é uma de três coisas</p>
+            <ol>
+                <li>um rótulo</li>
+                <li>um comentário</li>
+                <li>uma instrução</li>
+            </ol>
+            <p>Como são literalmente instruções que estão sendo dadas, assembly não é uma linguagem tão difícil, é somente verbosa, aqui está uma versão comentada do código acima:</p>
+            <pre class="asmcodeblock">
+min:                        ; nome da função
+    sub     sp, sp, #16     ; diminuir o tamanho do stack (4 valores, desconsideraremos neste exemplo)
+    str     w0, [sp, 12]    ; colocar o valor do primeiro argumento (a) na memória[12]
+    str     w1, [sp, 8]     ; colocar o valor do segundo argumento (b) na memória[8]
+    ldr     w1, [sp, 12]    ; colocar o valor em memoria[12] no registro 1
+    ldr     w0, [sp, 8]     ; colocar o valor em memoria[8] no registro 0 (basicamente trocar de lugar)
+    cmp     w1, w0          ; comparar registro 1 contra registro 0
+    ble     .L2             ; pule para a 1a instrução depois do rótulo .L2 caso w1 - w0 &lt; 0 
+    ldr     w0, [sp, 12]    ; carregue no registro de retorno o valor do primeiro argumento (a)
+    b       .L4             ; pule para a 1a instrução depois do rótulo .L4, incondicionalmente
+.L2:
+    ldr     w0, [sp, 8]     ; carregue no registro de retorno o valor do segundo argumento (b)
+.L4:
+    add     sp, sp, 16      ; limpe o stack (não é importante nesse exemplo)
+    ret                     ; retorne para a função que chamou
+            </pre>
+        </article>
+        <article>
+            <h2 id="numeros-mason">Os números Mason, o que eles significam</h2>
+            <p>Uma coisa que sempre acontece é abrir um arquivo executável num editor de texto, se você caso já fez isso, pode ser que tenha visto um monte de texto que parece que foi feito <a href="https://en.wikipedia.org/wiki/Infinite_monkey_theorem">por um macaco numa máquina de datilografar infinitamente</a>, mas na verdade os números que estão lá são o arquivo executável em si.</p>
+            <p>Na verdade, o computador nunca "vê" o arquivo como texto, mas como uma <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">uma estrutura muito complexa de seções</a> nas quais ele tem uma grande liberdade para modificar e executar</p>
+        </article>
+        <article>
+            <h2 id="codigo-escrito">O código não é o que eu tinha escrito</h2>
+            <p>muitas vezes, o código que nós escrevemos não é a solução mais performática que existe, por exemplo para detectar se 3 números são positivos, uma pessoa normalmente faria um código parecido com este:</p>
+            <pre class="codeblock">
+int positivos(int a, int b, int c) {
+    return a < 0 || b < 0 || c < 0;
+}
+            </pre>
+            <p>Não é uma solução ruim, porém o compilador gerará um código bem grande para ela:</p>
+            <pre class="asmcodeblock">
+positivos:
+        sub     sp, sp, #16
+        str     w0, [sp, 12]
+        str     w1, [sp, 8]
+        str     w2, [sp, 4]
+        ldr     w0, [sp, 12]
+        cmp     w0, 0
+        blt     .L2
+        ldr     w0, [sp, 8]
+        cmp     w0, 0
+        blt     .L2
+        ldr     w0, [sp, 4]
+        cmp     w0, 0
+        bge     .L3
+.L2:
+        mov     w0, 1
+        b       .L4
+.L3:
+        mov     w0, 0
+.L4:
+        add     sp, sp, 16
+        ret
+            </pre>
+            <p>Porém o compilador percebe que existem algumas propriedades dentro das especificações em que os programas normalmente são executados, e essas propriedades melhoram o código</p>
+        </article>
+        <article>
+            <h2 id="ele-melhora">Ele melhora??????</h2>
+            <p>SIM! E esse é um tópico muito interessante dentro do mundo de desenvolvimento de compiladores, mas para não fugir do tópico em que estávamos falando, aqui é um exemplo onde a flag de otimização `-O2` foi fornecida junto com a flag `-S`</p>
+            <pre class="asmcodeblock">
+positivos:
+    orr     w1, w1, w2
+    orr     w0, w1, w0
+    lsr     w0, w0, 31
+    ret
+            </pre>
+            <p>A diferença no código é gritante, e aqui estão as duas técnicas de otimização que foram utilizadas:</p>
+            <ol>
+                <li>primeiramente, todos os números inteiros tem a representação do sinal no último bit, então se caso ele for 1, representa qualquer número negativo</li>
+                <li>em segundo lugar, a instrução <code>orr</code> retornará um número onde os bits serão 1 caso o bit de um número ou de outro seja um</li>
+            </ol>
+            <p>portanto o código agora sobrepõe os bits de todos os números e arrasta o último bit da esquerda para o primeiro bit da direita, fazendo com que a função retorne 0 ou 1</p>
+            o que faz com que o código em C se pareça com:
+            <pre class="codeblock">
+int positivos(int a, int b, int c) {
+    return (unsigned)(a | b | c) >> 31; 
+}
+            </pre>
+            <p>O uso de <code>(unsigned)</code> foi necessário para que o sinal não seja preservado mas arrastado</p>
+        </article>
+    </main>
+    <script src="renderer.js"></script>
 </body>
 </html>

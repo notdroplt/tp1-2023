@@ -214,11 +214,11 @@ footer>p {
 	color: black;
 }
 
-.string {
+.string, .label {
 	color: var(--code-string);
 }
 
-.type {
+.type, .instruction {
 	color: var(--code-type);
 }
 
@@ -234,15 +234,20 @@ footer>p {
 	color: var(--code-comment);
 }
 
-.format {
+.format, .register {
 	color: var(--code-format);
 }
 
+code {
+	display:inline;
+}
 
-
-.codeblock {
-	font-family: monospace;
+.codeblock, .codeblock *, code, code *, .asmcodeblock, .asmcodeblock * {
+	font-family: 'Fira Code', monospace;
 	background-color: #333333;
+}
+
+.codeblock, .asmcodeblock{
 	padding: 3px;
 	border: 1px solid gray;
 	border-radius: 2px;
