@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<meta name="viewport" content="width=device-width">
+	<meta name="description" content="Site feito para demonstrar algumas características de C">
+	<meta name="author" content="Arthur (notdroplt)">
+	
+	<title>O ABdeC</title>
+	<link rel="stylesheet" type="text/css" href="base.css">
+</head>
+<body>
+    <nav>
+    <section>
+        <a href="./index.html">Página Inicial</a>
+    </section>
+    <section class="active-nav-section">
+        <a href="./linguagem_c.html">Linguagem C</a>
+        <ul>
+            <li>
+                <a href="./linguagem_c.html#Existe-A-B">Existe A e B?</a>
+            </li>
+            <li>
+                <a href="./linguagem_c.html#Tudo-Matematica">Tudo é matemática?</a>
+            </li>
+            <li>
+                <a href="./linguagem_c.html#ponto-virgula">O ilustre ";"</a>
+            </li>
+            <li>
+                <a href="./linguagem_c.html#ponteiros"> Ponteiros, que nem meu dedo?</a>
+            </li>
+            <li>
+                <a href="./linguagem_c.html#antes-main">O que tem antes da main?</a>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <a href="./gcc.html">O compilador GCC</a>
+        <ul>
+            <li>
+                <a href="./gcc.html#caixa-preta">A caixa preta mágica</a>
+            </li>
+            <li>
+                <a href="./gcc.html#codigo-meio">O código do meio</a>
+            </li>
+            <li>
+                <a href="./gcc.html#numeros-mason">Os números Mason, o que eles significam</a>
+            </li>
+            <li>
+                <a href="./gcc.html#codigo-escrito">O código não é o que eu tinha escrito</a>
+            </li>
+            <li>
+                <a href="./gcc.html#ele-melhora">Ele melhora??????</a>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <a href="./std.html">A biblioteca padrão</a>
+        <ul>
+            <li>
+                <a href="./std.html#printf">printf é incrível</a>
+            </li>
+            <li>
+                <a href="./std.html#alloc">alocação de memória, só que fácil</a>
+            </li>
+            <li>
+                <a href="./std.html#filesys">Um sistema de arquivos inteiro, no alcance de uma função</a>
+            </li>
+        </ul>
+    </section>
+    <section>
+        <a href="creditos.html">Créditos</a>
+    </section>
+</nav>
+<main>
+    <h1>A linguagem C</h1>
+    <p>Aqui falaremos um pouco sobre a linguagem e a sua história, nada de mais</p>
+    <article>
+        <h2 id="Existe-A-B">Existe A e B?</h2>
+        <p>B existiu, porém caíram em desuso. Ela foi utilizada em universidades e foi a precessora de C. Um fato a destacar é que 
+            a linguagem B foi escrita por <a href="https://pt.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a>, que, junto a <a href="https://pt.wikipedia.org/wiki/Dennis_Ritchie">Dennis Ritche, criador da linguagem C</a>, desenvolveram o sistema operacional <a href="https://pt.wikipedia.org/wiki/Unix">Unix</a>.
+        </p>
+    </article>
+    <article>
+        <h2 id="Tudo-Matematica">Tudo é matemática?</h2>
+        <p>Com um olhar mais abstrato: não, já que existem várias formas de processar dados dentro da linguagem. Porém olhando pela parte do código gerado, basicamente sim, e a esmagadora parte de todas as instruções do processador são explicadas utilizando aritimética simples. <a href="https://www.cs.sfu.ca/~ashriram/Courses/CS295/assets/notebooks/RISCV/RISCV_CARD.pdf">Exemplo com a arquitetura RISCV</a></p>
+    </article>
+    <article>
+        <h2 id="ponto-virgula">O ilustre ";"</h2>
+        <p>Um dos erros mais básicos é esquecer de colocar o `;` ao final de cada linha. Mas porquê que ele existe? A resposta não é muito clara, mas podemos ver com um exemplo</p>
+        <p>imagine um mundo onde C não tem ';', então temos o código abaixo</p>
+        <pre class="codeblock">
+char * str = strcopy(s)
+(s + 2) = '\n'
+        </pre>
+        <p>Normal até agora, certo? Tudo que esse pedaço de código faz é copiar uma string e colocar um '\n' no 3o caractere. Mas o problema aparece no compilador, pois ele ignora espaços em branco, fazendo o código se parecer mais com:</p>
+        <pre class="codeblock">
+char*str=strcopy(s)(s+2)='\n'
+        </pre>
+        <p>com isso, o compilador entra em ambiguidade com dois casos</p>
+        <ol>
+            <li>O programador queria chamar uma funcão que foi retornada por outra função</li>
+            <li>O programador queria chamar uma função e depois calcular o valor de `s + 2`</li>
+        </ol>
+        <p>como o compilador não pode "adivinhar", ele vai pela 1ª opção, que é a sintaticamente correta, mas não a desejada</p>
+        <p>por isso o `;` está aqui, para tirar ambiguidade de alguns casos</p>
+    </article>
+    <article>
+        <h2 id="ponteiros">Ponteiros, que nem meu dedo?</h2>
+        <p>Sim! é basicamente uma variável que é capaz de buscar um valor dentro da memória, nada mais. </p>
+        <p>Eles funcionam como um nome, Já que toda vez que referimos ao nome, não estamos falando do nome em si, mas do que aquele nome remete na realidade</p>
+    </article>
+    <article>
+        <h2 id="antes-main">O que tem antes da main?</h2>
+        <p>A main contém todo o programa que o programador escreve, mas não todo código que é executado, pois existe um mundo inteiro de bibliotecas sendo inicializadas por trás das cortinas que é a main, do mesmo jeito que tem muito código que é executado depois que a main retorna</p>
+    </article>
+</main>
+<script src="renderer.js"></script>
+</body>
+</html>

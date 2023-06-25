@@ -67,8 +67,7 @@ main {
 	color: white;
 	height: auto;
 
-	margin: 10px 20%;
-	margin-bottom: 35%;
+	margin: 0 20%;
 }
 
 nav {
@@ -159,11 +158,13 @@ nav ul li {
 	margin: 5px 0;
 }
 
-nav a {
-	text-decoration: none;
+a {
 	color: white;
 }
 
+nav a {
+	text-decoration: none;
+}
 iframe {
 	display: block;
 	margin-left: auto;
